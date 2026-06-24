@@ -77,11 +77,11 @@ The project is organized into 8 main stages:
 
 ## 📊 Stage 2 — Exploratory Data Analysis (EDA)
 
-* CEFR level distribution analysis
-* Category frequency exploration
-* Phrase length statistics
-* Dataset imbalance detection
-
+* Dataset profiling (14,848 records)
+* CEFR distribution analysis (imbalanced)
+* Category & sub-category distribution
+* Phrase length analysis (word-level dataset)
+* Visualization saved in data/processed
 ---
 
 ## 🤖 Stage 3 — Classical Machine Learning
