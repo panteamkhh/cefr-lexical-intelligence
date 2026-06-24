@@ -14,7 +14,7 @@ def clean_dataset(file_path, save_path):
 
     # Remove rows with missing values
     df = df.dropna()
-
+    print(df.columns)
     # Standardize column names
     df.columns = df.columns.str.lower().str.strip()
 
