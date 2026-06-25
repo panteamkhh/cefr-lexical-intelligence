@@ -1,7 +1,7 @@
 
 ---
 
-# 📚 CEFR Lexical Intelligence
+# 📚 Custom-built CEFR vocabulary dataset with 14,848 manually curated entries.
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)
 ![NLP](https://img.shields.io/badge/NLP-Semantic%20Modeling-green.svg)
@@ -21,6 +21,23 @@ The system transforms raw lexical data into an intelligent pipeline capable of:
 * Clustering lexical items in embedding space
 * Enabling similarity-based search
 * Automatically discovering hidden lexical categories
+
+---
+
+## 📚 Dataset
+
+The dataset used in this project was independently designed, curated, and structured by the author.
+
+Unlike projects that rely on publicly available benchmark datasets, this lexical resource was manually organized and categorized according to:
+
+* CEFR proficiency levels (A1–C2)
+* Main semantic categories
+* Fine-grained subcategories
+* Vocabulary and phrase-level lexical units
+
+The resulting dataset contains **14,848 vocabulary entries** spanning multiple domains such as daily life, technology, education, health, business, science, and communication.
+
+This custom-built dataset serves as the foundation for all subsequent stages of analysis, machine learning, semantic representation, clustering, and category discovery.
 
 ---
 
@@ -171,10 +188,10 @@ The project is organized into 8 main stages:
 * Visualization dashboard for linguistic structure
 
 ---
-
 ## 👨‍💻 Author
 
-A structured NLP research project focused on lexical intelligence, semantic modeling, and CEFR-based language understanding.
+This project, including the dataset design, categorization framework, data curation process, and NLP research pipeline, was independently developed by the author as a long-term exploration of lexical intelligence, semantic modeling, and CEFR-based language analysis.
+
 
 ---
 
