@@ -1,12 +1,9 @@
 import pandas as pd
-
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
-
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import LinearSVC
 from sklearn.ensemble import RandomForestClassifier
-
 from sklearn.metrics import classification_report, accuracy_score, f1_score
 
 # Load cleaned dataset
@@ -102,3 +99,26 @@ for name, preds in models.items():
 df_results = pd.DataFrame(results)
 
 print(df_results.sort_values(by="f1_weighted", ascending=False))
+
+
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
+
+cm = confusion_matrix(y_test, y_pred_svm)
+
+disp = ConfusionMatrixDisplay(confusion_matrix=cm,
+                              display_labels=svm.classes_)
+
+disp.plot(xticks_rotation=45)
+plt.title("SVM Confusion Matrix")
+plt.show()
+
+
+cm = confusion_matrix(y_test, y_pred_rf)
+
+disp = ConfusionMatrixDisplay(confusion_matrix=cm,
+                              display_labels=rf.classes_)
+
+disp.plot(xticks_rotation=45)
+plt.title("Random Forest Confusion Matrix")
+plt.show()
