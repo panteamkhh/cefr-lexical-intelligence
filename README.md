@@ -1,3 +1,5 @@
+<div align="center">
+
 # 📚 CEFR Lexical Intelligence
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)
@@ -5,7 +7,9 @@
 ![ML](https://img.shields.io/badge/ML-Clustering-orange.svg)
 ![Status](https://img.shields.io/badge/Project-Active-brightgreen.svg)
 
----
+</div>
+
+<br>
 
 ## 🧠 Overview
 
@@ -22,97 +26,109 @@ The project covers a full pipeline from raw data to semantic intelligence:
 - Semantic search
 - Category discovery
 
----
+<br>
 
 ## 📊 Dataset
 
-- ~14,000+ vocabulary and phrase entries  
-- CEFR levels (A1–C2)  
-- Main semantic categories  
-- Sub-categories  
+| Attribute | Details |
+|---|---|
+| **Size** | ~14,000+ vocabulary and phrase entries |
+| **CEFR Levels** | A1–C2 |
+| **Categories** | Main semantic categories |
+| **Sub-categories** | Included |
 
----
+<br>
 
 ## 🏗 Project Pipeline
 
----
+<br>
 
-### 🟢 Phase 1 — Clean Data (DONE)
+### 🟢 Phase 1 — Clean Data `DONE`
+
 - Load raw dataset (Excel format)
 - Handle missing values
 - Remove duplicates
 - Normalize text (lowercase + strip)
 - Standardize column names
-- Output: `clean_dataset.csv`
+- **Output:** `clean_dataset.csv`
 
----
+<br>
 
-### 🟡 Phase 2 — EDA (DONE)
+### 🟡 Phase 2 — EDA `DONE`
+
 - CEFR level distribution
 - Category / sub-category distribution
 - Phrase length analysis
 - Cross-tab analysis
 
-**Key Insight:**
+> **Key Insight:**
 > Dataset is imbalanced and semantic embeddings are more effective than pure classical ML.
 
----
+<br>
 
 ### 🟠 Phase 3 — Classical ML
-- TF-IDF feature extraction
-- Models:
-  - Logistic Regression
-  - SVM
-  - Random Forest
-- Evaluation:
-  - Accuracy
-  - F1-score
-  - Recall
 
----
+**Feature extraction:** TF-IDF
+
+**Models:**
+- Logistic Regression
+- SVM
+- Random Forest
+
+**Evaluation:**
+- Accuracy
+- F1-score
+- Recall
+
+<br>
 
 ### 🔵 Phase 4 — Embeddings / Similarity
-- Model: `all-MiniLM-L6-v2`
+
+- **Model:** `all-MiniLM-L6-v2`
 - 384-dimensional sentence embeddings
 - Semantic vector space representation
 - Cosine similarity for semantic search foundation
 
-Outputs:
+**Outputs:**
 - `embeddings.npy`
 - `metadata.csv`
 
----
+<br>
 
 ### 🟣 Phase 5 — Unsupervised Learning
+
 - KMeans clustering
 - DBSCAN clustering
 - Hierarchical clustering
 - Dimensionality reduction (PCA / UMAP)
 - Evaluation using Silhouette Score
 
----
+<br>
 
 ### 🔵 Phase 6 — CEFR vs Embedding Analysis
+
 - Compare CEFR labels with embedding clusters
 - Analyze semantic vs linguistic alignment
 - Identify mismatch patterns
 
----
+<br>
 
 ### 🟡 Phase 7 — Semantic Search
+
 - Query → embedding conversion
 - Cosine similarity ranking
 - Top-K retrieval system
 - Optional filtering by CEFR/category
 
----
+<br>
 
 ### 🟣 Phase 8 — Category Discovery
+
 - Unsupervised cluster interpretation
 - Discovery of hidden semantic groups
 - Comparison with existing taxonomy
 
----
+<br>
 
 ## ⚡ Core Principles
 
@@ -120,19 +136,16 @@ Outputs:
 - Clustering happens only in Phase 5
 - EDA is insight, not modeling
 
----
+<br>
 
 ## 📁 Project Structure
 
+```text
 data/
 ├── raw/
-│
 ├── processed/
-│
 ├── figures/
-│
 ├── output/
-
 
 notebooks/
 ├── 01_clean_data.ipynb
@@ -157,3 +170,4 @@ root/
 ├── requirements.txt
 ├── README.md
 ├── .gitignore
+```
