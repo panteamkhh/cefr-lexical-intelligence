@@ -6,7 +6,7 @@ def clean_dataset(file_path, save_path):
     file_path = Path(file_path)
 
     # -------------------------
-    # Load dataset (Excel safe)
+    # Load dataset 
     # -------------------------
     df = pd.read_excel(file_path, engine="openpyxl")
 
