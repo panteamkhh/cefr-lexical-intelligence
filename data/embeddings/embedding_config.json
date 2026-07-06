@@ -1,0 +1,7 @@
+{
+    "model": "sentence-transformers/all-MiniLM-L6-v2",
+    "dimension": 384,
+    "normalize_embeddings": true,
+    "dataset": "clean_dataset.xlsx",
+    "num_samples": 14848
+}
