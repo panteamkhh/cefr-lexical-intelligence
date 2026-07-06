@@ -43,7 +43,7 @@ The project covers a full pipeline from raw data to semantic intelligence:
 
 <br>
 
-### 🟢 Phase 1 — Clean Data `DONE`
+### 🟢 Phase 1 — Clean Data 
 
 - Load raw dataset (Excel format)
 - Handle missing values
@@ -54,7 +54,7 @@ The project covers a full pipeline from raw data to semantic intelligence:
 
 <br>
 
-### 🟡 Phase 2 — EDA `DONE`
+### 🟡 Phase 2 — EDA 
 
 - CEFR level distribution
 - Category / sub-category distribution
