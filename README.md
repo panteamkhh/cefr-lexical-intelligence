@@ -102,7 +102,7 @@ Baseline comparison against semantic embeddings.
 This phase converts text into a **semantic vector space representation**.
 
 **Outputs:**
-```text
+
 data/embeddings/
  ├── embeddings.npy 
  ├── metadata.csv 
