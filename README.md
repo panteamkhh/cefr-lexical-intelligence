@@ -187,12 +187,20 @@ This phase transforms embeddings into a **search engine-like system**.
 ```text
 data/
 ├── raw/
+│    └── toefl_vocabulary_cleaned_categorized.xlsx
 ├── processed/
 │   └── clean_dataset.xlsx
 ├── embeddings/
 │   ├── embeddings.npy
 │   ├── metadata.csv
 │   └── embedding_config.json
+├── clustering/
+│   ├── kmeans_labels.csv
+│   ├── dbscan_labels.csv
+│   ├── hierarchical_labels.csv
+│   ├── cluster_metrics.json
+│   ├── representative_samples.csv
+│   └── clustering_config.json
 ├── figures/
 └── output/
 
@@ -215,8 +223,6 @@ src/
 ├── search.py
 └── utils.py
 
-configs/
-└── embedding_config.json
 
 root/
 ├── main.py
