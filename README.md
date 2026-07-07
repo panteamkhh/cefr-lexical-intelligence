@@ -124,14 +124,24 @@ The dataset is now represented as a geometric semantic space, enabling similarit
 
 ### 🟣 Phase 5 — Clustering (Unsupervised Learning)
 
-- KMeans clustering
-- DBSCAN clustering
-- Hierarchical clustering
-- Dimensionality reduction (PCA / UMAP)
-- Evaluation via silhouette score
+Applies unsupervised learning to the Phase 4 embeddings to discover hidden
+semantic structure, **without using CEFR labels**. Implemented as a
+reproducible pipeline (`src/clustering.py`) in five steps:
+
+1. **Prepare Embedding Space**
+2. **Apply Multiple Clustering Algorithms**
+3. **Evaluate Clustering Quality**
+4. **Select Best Model**
+5. **Cluster Analysis**
 
 **Goal:**
 Discover hidden semantic groups in embedding space.
+
+**Current result:**
+Hierarchical clustering (k=5) is the best-performing model so far
+(silhouette ≈ 0.09), though all algorithms currently show relatively low
+silhouette scores — an indication that the vocabulary's semantic space is
+not sharply separated, to be explored further in Phase 6/8.
 
 <br>
 
@@ -195,14 +205,28 @@ data/
 │   ├── metadata.csv
 │   └── embedding_config.json
 ├── clustering/
-│   ├── kmeans_labels.csv
+│   ├── kmeans_labels.csv           # best-of-KMeans only
 │   ├── dbscan_labels.csv
 │   ├── hierarchical_labels.csv
-│   ├── cluster_metrics.json
-│   ├── representative_samples.csv
-│   └── clustering_config.json
+│   ├── final_cluster_labels.csv    # labels from the overall winning algorithm
+│   ├── cluster_metrics.json        # best_model / all_results / selection_criterion
+│   ├── clustering_config.json      # selected algorithm, params, embedding model, metrics
+│   ├── comparison_table.csv        # all algorithms x k, sorted by silhouette
+│   ├── representative_samples.csv  # closest samples to each cluster centroid
+│   ├── nearest_examples.csv        # word + definition for representative samples
+│   └── embedding_projections.csv   # sample_id, pca_1/2, umap_1/2 (reused, never recomputed)
+│ 
+│
 ├── figures/
 └── output/
+
+experiments/
+└── clustering/
+    ├── intermediate_results/
+    ├── model_search_results/       # per-k KMeans label files (k=2..10), kept out of data/clustering
+    └── experimental_plots/
+
+
 
 notebooks/
 ├── 01_clean_data.ipynb

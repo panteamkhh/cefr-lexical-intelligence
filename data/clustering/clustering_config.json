@@ -1,0 +1,13 @@
+{
+    "selected_algorithm": "Hierarchical",
+    "selected_parameters": {
+        "k": 5
+    },
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "num_samples": 14848,
+    "final_metrics": {
+        "silhouette": 0.08952368050813675,
+        "davies_bouldin": 1.9540618779731826,
+        "calinski_harabasz": 3.5757652968912725
+    }
+}
