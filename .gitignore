@@ -2,3 +2,18 @@
 *.tmp
 ~$*
 .ipynb_checkpoints/
+
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
+
+# Bulk / regenerable data - keep out of git (large files, reproducible by
+# re-running the pipeline). Figures are the exception: they're small and
+# need to be committed so they render in README.md on GitHub.
+data/raw/
+data/processed/
+data/embeddings/
+data/clustering/
+data/output/
+experiments/
