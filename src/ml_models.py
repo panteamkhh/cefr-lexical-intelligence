@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pandas as pd
 
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -12,16 +14,24 @@ from sklearn.metrics import (
     accuracy_score,
     f1_score,
     confusion_matrix,
-    ConfusionMatrixDisplay
+    ConfusionMatrixDisplay,
 )
 
 import matplotlib.pyplot as plt
 
+# =========================
+# Project paths
+# =========================
+BASE_DIR = Path(__file__).resolve().parent.parent
+OUTPUT_DIR = BASE_DIR / "data" / "output"
+FIGURE_DIR = BASE_DIR / "data" / "figures"
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+FIGURE_DIR.mkdir(parents=True, exist_ok=True)
 
 # =========================
-# 1. Load Dataset
+# 1. Load Dataset (output of Phase 1)
 # =========================
-file_path = r"D:\list of words\cefr-project\data\processed\clean_dataset.xlsx"
+file_path = BASE_DIR / "data" / "processed" / "clean_dataset.xlsx"
 df = pd.read_excel(file_path)
 
 # Normalize column names
@@ -87,18 +97,18 @@ results = {}
 
 for name, model in models.items():
     print(f"\n=== Training {name} ===")
-    
+
     # Train model
     model.fit(X_train, y_train)
-    
+
     # Predictions
     y_pred = model.predict(X_test)
-    
+
     # Evaluation metrics
     acc = accuracy_score(y_test, y_pred)
     f1_macro = f1_score(y_test, y_pred, average="macro")
     f1_weighted = f1_score(y_test, y_pred, average="weighted")
-    
+
     # Store results
     results[name] = {
         "accuracy": acc,
@@ -107,7 +117,7 @@ for name, model in models.items():
         "predictions": y_pred,
         "model": model
     }
-    
+
     # Print report
     print(classification_report(y_test, y_pred))
 
@@ -123,10 +133,15 @@ df_results = pd.DataFrame([
         "f1_weighted": res["f1_weighted"]
     }
     for name, res in results.items()
-])
+]).sort_values(by="f1_weighted", ascending=False)
 
 print("\n=== Model Comparison ===")
-print(df_results.sort_values(by="f1_weighted", ascending=False))
+print(df_results)
+
+
+comparison_path = OUTPUT_DIR / "ml_baseline_comparison.csv"
+df_results.to_csv(comparison_path, index=False)
+print("Saved:", comparison_path)
 
 
 # =========================
@@ -145,7 +160,10 @@ disp = ConfusionMatrixDisplay(
 
 disp.plot(xticks_rotation=45)
 plt.title("Confusion Matrix - Linear SVM")
-plt.show()
+plt.tight_layout()
+plt.savefig(FIGURE_DIR / "confusion_matrix_svm.png", dpi=300)
+plt.close()
+print("Saved:", FIGURE_DIR / "confusion_matrix_svm.png")
 
 
 # =========================
@@ -163,4 +181,9 @@ disp = ConfusionMatrixDisplay(
 
 disp.plot(xticks_rotation=45)
 plt.title("Confusion Matrix - Random Forest")
-plt.show()
+plt.tight_layout()
+plt.savefig(FIGURE_DIR / "confusion_matrix_rf.png", dpi=300)
+plt.close()
+print("Saved:", FIGURE_DIR / "confusion_matrix_rf.png")
+
+print("\n✅ Phase 3 (Classical Machine Learning) completed.")
