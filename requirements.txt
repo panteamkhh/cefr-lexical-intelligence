@@ -1,6 +1,9 @@
 pandas
 numpy
 scikit-learn
-sentence-transformers
+scipy
 matplotlib
 seaborn
+openpyxl
+sentence-transformers
+umap-learn
