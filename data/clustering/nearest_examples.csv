@@ -1,19 +1,15 @@
-word,definition,cluster,distance
-,,0,0.3658934235572815
-,,0,0.3661459684371948
-,,0,0.3664032220840454
-,,0,0.36659854650497437
-,,0,0.3679717779159546
-,,1,0.24720484018325806
-,,1,0.24720484018325806
-,,1,0.3198448419570923
-,,1,0.3471665382385254
-,,1,0.5574690103530884
-,,2,0.17140734195709229
-,,2,0.20462214946746826
-,,2,0.27181828022003174
-,,2,0.2969108819961548
-,,2,0.3200925588607788
-,,3,0.0
-,,4,0.03789633512496948
-,,4,0.03789651393890381
+phrase,level,main_category,sub_category,cluster,distance
+clean,B1,Daily_Life,General_Interactions,0,0.36589741706848145
+something,B1,Daily_Life,General_Interactions,0,0.3667933940887451
+action,B1,Psychology_Emotions,Behavior,0,0.3676106929779053
+inquiry,B1,Daily_Life,General_Interactions,0,0.3681294918060303
+job,B1,Business_Finance_Economy,Jobs_Careers,0,0.36880970001220703
+wireless hotspot,B1,Daily_Life,General_Interactions,1,0.19279295206069946
+wi-fi hotspots,B1,Daily_Life,General_Interactions,1,0.1946815848350525
+use satnav,B1,Daily_Life,General_Interactions,1,0.48478710651397705
+swipe a card,B1,Travel_Transportation,Road_Travel,1,0.5052744150161743
+valid passport,C2,Education,Exams_Assessments,2,0.0
+calorie,B1,Health_Medicine,Nutrition_Diet,3,0.11364173889160156
+calories,B1,Health_Medicine,Nutrition_Diet,3,0.1570570468902588
+anti-aging properties,B1,Daily_Life,General_Interactions,3,0.46342700719833374
+widening gulf,C2,Daily_Life,General_Interactions,4,0.0

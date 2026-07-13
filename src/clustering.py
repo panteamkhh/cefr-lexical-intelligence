@@ -35,8 +35,6 @@ EMBEDDING_DIR = DATA_DIR / "embeddings"
 CLUSTERING_DIR = DATA_DIR / "clustering"
 FIGURE_DIR = DATA_DIR / "figures"
 
-# Experiments directory: for intermediate / model-search artifacts that
-# should NOT pollute the final data/clustering output folder.
 EXPERIMENTS_DIR = PROJECT_ROOT / "experiments" / "clustering"
 INTERMEDIATE_DIR = EXPERIMENTS_DIR / "intermediate_results"
 MODEL_SEARCH_DIR = EXPERIMENTS_DIR / "model_search_results"
@@ -69,7 +67,15 @@ assert embeddings.shape[0] == len(metadata)
 assert embeddings.shape[1] == config["dimension"]
 assert len(metadata) == config["num_samples"]
 
-print("✅ Embedding artifacts are consistent.")
+
+_dup_cols = ["phrase", "level", "main_category", "sub_category"]
+_n_dupes = metadata.duplicated(subset=_dup_cols).sum()
+assert _n_dupes == 0, (
+    f"Found {_n_dupes} exact duplicate rows in metadata.csv - "
+    "re-run Phase 1 (data_cleaning.py) first."
+)
+
+print(" Embedding artifacts are consistent.")
 
 # ============================================================
 # Create Output Directories
@@ -153,14 +159,12 @@ projection_df.to_csv(
     index=False
 )
 
-print("✅ Projection files saved.")
+print(" Projection files saved.")
 
 # ============================================================
 # Task 2 - KMeans Clustering (k = 2..10)
 # ============================================================
-# NOTE: Every intermediate k is kept in memory for evaluation, and its
-# labels are additionally written to experiments/ (model-search artifacts),
-# NOT to data/clustering/, to avoid polluting the final output folder.
+
 
 k_values = range(2, 11)
 kmeans_models = {}
@@ -184,7 +188,7 @@ for k in k_values:
         index=False
     )
 
-print("✅ KMeans clustering completed (search artifacts in experiments/).")
+print(" KMeans clustering completed (search artifacts in experiments/).")
 
 # ============================================================
 # Task 2 - DBSCAN Clustering
@@ -208,7 +212,7 @@ pd.DataFrame(
     index=False
 )
 
-print("✅ DBSCAN clustering completed.")
+print(" DBSCAN clustering completed.")
 
 # ============================================================
 # Task 2 - Hierarchical Clustering
@@ -232,7 +236,7 @@ pd.DataFrame(
     index=False
 )
 
-print("✅ Hierarchical clustering completed.")
+print(" Hierarchical clustering completed.")
 
 # ============================================================
 # Task 3 - Evaluate Clustering Models
@@ -322,7 +326,7 @@ pd.DataFrame(
     index=False
 )
 
-print(f"✅ Best KMeans result saved (k={best_kmeans_k}).")
+print(f" Best KMeans result saved (k={best_kmeans_k}).")
 
 # ============================================================
 # Task 4 - Select Best Model Overall (highest silhouette)
@@ -382,7 +386,7 @@ clustering_config = {
 with open(CLUSTERING_DIR / "clustering_config.json", "w", encoding="utf-8") as f:
     json.dump(clustering_config, f, indent=4)
 
-print("✅ Clustering evaluation completed.")
+print(" Clustering evaluation completed.")
 
 # ============================================================
 # Task 5 - Cluster Analysis
@@ -463,8 +467,10 @@ for cluster_id in unique_clusters:
         row = metadata.iloc[sample_idx]
         nearest_examples.append(
             {
-                "word": row.get("word", row.get("term", None)),
-                "definition": row.get("definition", None),
+                "phrase": row.get("phrase", None),
+                "level": row.get("level", None),
+                "main_category": row.get("main_category", None),
+                "sub_category": row.get("sub_category", None),
                 "cluster": int(cluster_id),
                 "distance": distance
             }
@@ -482,7 +488,7 @@ nearest_examples_df.to_csv(
     index=False
 )
 
-print("✅ Representative samples and nearest examples saved.")
+print(" Representative samples and nearest examples saved.")
 
 # ============================================================
 # Final Visualization (reuses existing UMAP projection, not recomputed)
