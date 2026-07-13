@@ -246,7 +246,6 @@ This split is actually informative: cluster 0 mixes CEFR levels much more (highe
   <em>UMAP projection colored by CEFR level (left) vs. by cluster (right)</em>
 </p>
 
-> If this image doesn't render on GitHub: `data/` is gitignored by default in this project (see `.gitignore`) so `data/figures/*.png` never gets committed unless you explicitly `git add` it. Run `git add -f data/figures/cefr_vs_cluster_umap.png` (or update `.gitignore` to stop excluding `data/figures/`) and commit it.
 
 <br>
 
