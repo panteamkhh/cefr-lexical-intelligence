@@ -115,8 +115,12 @@ Semantic modeling is more effective than classical feature engineering for this 
 - `sub_category_distribution.png`
 - `phrase_length_distribution.png`
 
-![CEFR level distribution](data/figures/cefr_level_distribution.png)
-![Main category distribution](data/figures/main_category_distribution.png)
+<p align="center">
+  <img src="data/figures/cefr_level_distribution.png" width="420">
+  <img src="data/figures/main_category_distribution.png" width="420">
+  <br>
+  <em>CEFR level distribution (left) and main category distribution (right)</em>
+</p>
 
 <br>
 
@@ -142,7 +146,11 @@ Semantic modeling is more effective than classical feature engineering for this 
 - `data/output/ml_baseline_comparison.csv`
 - `data/figures/confusion_matrix_svm.png`, `confusion_matrix_rf.png`
 
-![Random Forest confusion matrix](data/figures/confusion_matrix_rf.png)
+<p align="center">
+  <img src="data/figures/confusion_matrix_rf.png" width="480">
+  <br>
+  <em>Random Forest confusion matrix (test set)</em>
+</p>
 
 <br>
 
@@ -232,7 +240,13 @@ This split is actually informative: cluster 0 mixes CEFR levels much more (highe
 - `cefr_kmeans_crosstab_counts.csv`, `cefr_kmeans_crosstab_pct.csv`, `cefr_kmeans_cluster_summary.csv`, `cefr_kmeans_mismatches.csv` *(kept — this is the only genuinely informative CEFR-vs-cluster comparison, given the primary model's imbalance)*
 - `cefr_vs_cluster_umap.png`
 
-![CEFR vs cluster UMAP](data/figures/cefr_vs_cluster_umap.png)
+<p align="center">
+  <img src="data/figures/cefr_vs_cluster_umap.png" width="700">
+  <br>
+  <em>UMAP projection colored by CEFR level (left) vs. by cluster (right)</em>
+</p>
+
+> If this image doesn't render on GitHub: `data/` is gitignored by default in this project (see `.gitignore`) so `data/figures/*.png` never gets committed unless you explicitly `git add` it. Run `git add -f data/figures/cefr_vs_cluster_umap.png` (or update `.gitignore` to stop excluding `data/figures/`) and commit it.
 
 <br>
 
@@ -314,7 +328,7 @@ All three demos retrieve clearly on-topic, correctly-filtered results — a good
 
 ---
 
-## ⚡ Core Principles
+##  Core Principles
 
 - Embeddings are generated once and reused across all phases
 - Phase 4 is the foundation of the entire system
@@ -387,35 +401,8 @@ cefr-project/
 └── .gitignore
 ```
 
-> **Notebooks are optional.** Every phase already runs end-to-end as a plain script in `src/`. The notebooks listed above are just thin wrappers for interactive exploration — nothing in the pipeline depends on them. Skip them unless you specifically want a notebook-based walkthrough.
-
 <br>
 
 ---
 
-## ▶️ Running the pipeline
-
-Each phase can be run individually:
-
-```bash
-python src/data_cleaning.py
-python src/eda.py
-python src/ml_models.py
-python src/embeddings.py
-python src/clustering.py
-python src/cefr_analysis.py
-python src/category_discovery.py
-```
-
-`src/search.py` is not a pipeline step — import `search()` from it, or run it directly for a demo:
-
-```bash
-python src/search.py
-```
-
-Or run everything in order (Phases 1–6 + 8) with:
-
-```bash
-python main.py
-```
 
