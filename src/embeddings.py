@@ -1,17 +1,26 @@
 # =========================
 # Imports
 # =========================
+from pathlib import Path
+import json
+
 import pandas as pd
 import numpy as np
-import json
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 
+# =========================
+# Project paths
+# =========================
+BASE_DIR = Path(__file__).resolve().parent.parent
+PROCESSED_DIR = BASE_DIR / "data" / "processed"
+EMBEDDING_DIR = BASE_DIR / "data" / "embeddings"
+EMBEDDING_DIR.mkdir(parents=True, exist_ok=True)
 
 # =========================
-# Load Dataset
+# Load Dataset (output of Phase 1)
 # =========================
-df = pd.read_excel("data/processed/clean_dataset.xlsx")
+df = pd.read_excel(PROCESSED_DIR / "clean_dataset.xlsx")
 phrases = df["phrase"].tolist()
 
 
@@ -50,7 +59,7 @@ print("Max norm:", norms.max())
 # =========================
 # Save Embeddings
 # =========================
-np.save("data/embeddings/embeddings.npy", embeddings)
+np.save(EMBEDDING_DIR / "embeddings.npy", embeddings)
 
 
 # =========================
@@ -59,7 +68,8 @@ np.save("data/embeddings/embeddings.npy", embeddings)
 metadata = df.copy()
 metadata.insert(0, "id", range(1, len(metadata) + 1))
 
-metadata = metadata.drop(columns=["#"])
+if "#" in metadata.columns:
+    metadata = metadata.drop(columns=["#"])
 
 metadata.rename(
     columns={
@@ -80,7 +90,7 @@ metadata = metadata[
 ]
 
 metadata.to_csv(
-    "data/embeddings/metadata.csv",
+    EMBEDDING_DIR / "metadata.csv",
     index=False,
     encoding="utf-8-sig",
 )
@@ -98,7 +108,7 @@ config = {
 }
 
 with open(
-    "data/embeddings/embedding_config.json",
+    EMBEDDING_DIR / "embedding_config.json",
     "w",
     encoding="utf-8"
 ) as f:
@@ -106,7 +116,7 @@ with open(
 
 
 # =========================
-# Semantic Validation 
+# Semantic Validation
 # =========================
 def sim(a, b):
     return cosine_similarity([a], [b])[0][0]
@@ -128,3 +138,5 @@ vehicle = embeddings[10]
 print("economy vs emotion:", sim(economy, emotion))
 print("economy vs vehicle:", sim(economy, vehicle))
 print("emotion vs vehicle:", sim(emotion, vehicle))
+
+print("\n✅ Phase 4 (Embedding Pipeline) completed.")
